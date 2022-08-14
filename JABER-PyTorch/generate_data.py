@@ -43,10 +43,10 @@ warnings.filterwarnings("ignore")
 '''class ArabertPreprocessor:
     def __init__(self, model_name):
         print("Warning!!!! This is just an empty a placeholder class. "
-              "Follow instructions in README.md file to obtain the true `ArabertPreprocessor` class")'''
+              "Follow instructions in README.md file to obtain the true `ArabertPreprocessor` class")
 
     def preprocess(self, text):
-        return text
+        return text'''
 
 def normalize_text(pp_text):
     # map some weired characters
