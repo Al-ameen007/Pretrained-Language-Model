@@ -171,7 +171,7 @@ def get_tag_to_id_cls(exp_lst):
     return tag_to_id
 
 
-def load_mq2q_dev():
+'''def load_mq2q_dev():
     filename = "./raw_datasets/mq2q.dev.tsv"
     if not os.path.exists(filename):
         raise ValueError ("Please check the README to generate MQ2Q dev set")
@@ -179,7 +179,7 @@ def load_mq2q_dev():
     for idx, line in enumerate(open(filename)):
         lbl, s1, s2 = line.strip().split("\t")
         lst.append({"idx": len(lst), "s_lst": [s1, s2], "lbl": int(lbl)})
-    return lst
+    return lst'''
 
 
 def process_alue():
@@ -187,7 +187,7 @@ def process_alue():
     bench_dict = {}
     data_dir = "./raw_datasets"
 
-    # MQ2Q
+    '''# MQ2Q
     bench_dict["MQ2Q"] = defaultdict(list)
     df_train = pd.read_csv(os.path.join(data_dir, "q2q_similarity_workshop_v2.1.tsv"), sep="\t")
     df_test = pd.read_csv(os.path.join(data_dir, "q2q_no_labels_v1.0 - q2q_no_labels_v1.0.tsv"), sep="\t")
@@ -229,7 +229,7 @@ def process_alue():
 
         if portion == "test":
             for exp in bench_dict["SVREG"]["test"]:
-                del exp["lbl"]
+                del exp["lbl"]'''
 
     # SEC
     bench_dict["SEC"] = defaultdict(list)
@@ -243,7 +243,7 @@ def process_alue():
                 exp["lbl"] = [int(v) for _, v in list(row.items())[2:]]
             bench_dict["SEC"][portion].append(exp)
 
-    # FID
+    '''# FID
     bench_dict["FID"] = defaultdict(list)
     filename = os.path.join(data_dir, "IDAT_data", "IDAT_%s_text.csv")
     for portion in ["train", "test"]:
@@ -274,7 +274,7 @@ def process_alue():
         df = pd.read_csv(filename % portion, sep="\t", header=None, names=["Text", "label"])
         for idx, (s, lbl) in enumerate(zip(df["Text"], df["label"])):
             exp = {"idx": idx, "s_lst": [s], "lbl": lbl}
-            bench_dict["MDD"][portion].append(exp)
+            bench_dict["MDD"][portion].append(exp)'''
 
     # generate tag_to_id
     ft_proc = FTProcessor(128, "jaber")
