@@ -1,7 +1,7 @@
 
-# 2021.09.29-Modified slightly on Arabic text preprocessing as well as added method for preprocessing 
+# 2021.09.29-Modified slightly on Arabic text preprocessing as well as added method for preprocessing
 # ALUE data; prepared ALUE test set submission
-#              Huawei Technologies Co., Ltd. 
+#              Huawei Technologies Co., Ltd.
 
 # Copyright 2021 Huawei Technologies Co., Ltd.
 
@@ -21,6 +21,7 @@ import re, locale, optparse
 
 import pyarabic.araby as araby
 from tokenizationBBPE import FullTokenizer
+from preprocess import ArabertPreprocessor
 
 optparser = optparse.OptionParser()
 
@@ -39,10 +40,10 @@ warnings.filterwarnings("ignore")
 ############################
 ## Code to download ALUE ###
 ############################
-class ArabertPreprocessor:
+'''class ArabertPreprocessor:
     def __init__(self, model_name):
         print("Warning!!!! This is just an empty a placeholder class. "
-              "Follow instructions in README.md file to obtain the true `ArabertPreprocessor` class")
+              "Follow instructions in README.md file to obtain the true `ArabertPreprocessor` class")'''
 
     def preprocess(self, text):
         return text
