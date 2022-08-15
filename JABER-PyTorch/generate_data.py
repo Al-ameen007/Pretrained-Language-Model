@@ -240,7 +240,7 @@ def process_alue():
         df = pd.read_csv(filename, sep="\t")
         for row in df.to_dict(orient="records"):
             exp = {"idx": row["ID"], "s_lst": [row["Tweet"]]}
-            if filename != "emotion_no_labels_v1.0.tsv":
+            if filename != os.path.join(secDir, "emotion_no_labels_v1.0.tsv"):
                 exp["lbl"] = [int(v) for _, v in list(row.items())[2:]]
                 bench_dict["SEC"][portion].append(exp)
 
