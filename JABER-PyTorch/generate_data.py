@@ -185,7 +185,7 @@ def get_tag_to_id_cls(exp_lst):
 def process_alue():
     # https://www.alue.org/tasks
     bench_dict = {}
-    data_dir = "/content/Pretrained-Language-Model/JABER-PyTorch/raw_datasets"
+    data_dir = "./raw_datasets"
 
     '''# MQ2Q
     bench_dict["MQ2Q"] = defaultdict(list)
@@ -234,16 +234,17 @@ def process_alue():
     # SEC
 
     bench_dict["SEC"] = defaultdict(list)
-    filename = os.path.join(data_dir, "SemEval2018-Task1-all-data/Arabic/E-c/2018-E-c-Ar-%s.txt")
-
-    for portion in ["train", "dev", "test", "test-gold"]:
-        df = pd.read_csv(filename % portion, sep="\t")
-
+    secDir = os.path.join(data_dir, "SemEval2018-Task1-all-data/Arabic/E-c")
+    for filename in os.listdir(secDir):
+        f = os.path.join(secDir, filename)
+        df = pd.read_csv(filename, sep="\t")
         for row in df.to_dict(orient="records"):
             exp = {"idx": row["ID"], "s_lst": [row["Tweet"]]}
-            if portion != "test":
+            if filename != "emotion_no_labels_v1.0.tsv":
                 exp["lbl"] = [int(v) for _, v in list(row.items())[2:]]
-            bench_dict["SEC"][portion].append(exp)
+                bench_dict["SEC"][portion].append(exp)
+
+
 
     '''# FID
     bench_dict["FID"] = defaultdict(list)
