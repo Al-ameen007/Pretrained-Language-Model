@@ -2,11 +2,38 @@
 
 TASK=$1
 
-if [ ${TASK,,} == sec ]; then
+if [ ${TASK,,} == mq2q ]; then
+    DROPOUT=0.3
+    LR=2e-5
+    BATCH_SIZE=64
+elif [ ${TASK,,} == oold ]; then
+    DROPOUT=0.2
+    LR=2e-5
+    BATCH_SIZE=128
+elif [ ${TASK,,} == ohsd ]; then
+    DROPOUT=0.3
+    LR=7e-6
+    BATCH_SIZE=32
+elif [ ${TASK,,} == svreg ]; then
+    DROPOUT=0.1
+    LR=2e-5
+    BATCH_SIZE=8
+elif [ ${TASK,,} == sec ]; then
     DROPOUT=0.1
     LR=2e-5
     BATCH_SIZE=16
-
+elif [ ${TASK,,} == fid ]; then
+    DROPOUT=0.1
+    LR=2e-5
+    BATCH_SIZE=32
+elif [ ${TASK,,} == xnli ]; then
+    DROPOUT=0.1
+    LR=2e-5
+    BATCH_SIZE=16
+elif [ ${TASK,,} == mdd ]; then
+    DROPOUT=0.2
+    LR=2e-5
+    BATCH_SIZE=32
 else
     echo "{$TASK} is not supported, Exit!!!!"
     exit 125
