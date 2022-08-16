@@ -234,12 +234,12 @@ def process_alue():
     # SEC
     bench_dict["SEC"] = defaultdict(list)
     filename = os.path.join(data_dir, "SemEval2018-Task1-all-data/Arabic/E-c/2018-E-c-Ar-%s.txt")
-    for portion in ["train", "dev", "test", "test-gold"]:
+    for portion in ["train", "dev", "test-gold"]:
         df = pd.read_csv(filename % portion, sep="\t")
 
         for row in df.to_dict(orient="records"):
             exp = {"idx": row["ID"], "s_lst": [row["Tweet"]]}
-            if portion != "test":
+            if portion != "test-gold":
                 exp["lbl"] = [int(v) for _, v in list(row.items())[2:]]
             bench_dict["SEC"][portion].append(exp)
 
