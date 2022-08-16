@@ -2,44 +2,17 @@
 
 TASK=$1
 
-if [ ${TASK,,} == mq2q ]; then
-    DROPOUT=0.3
-    LR=2e-5
-    BATCH_SIZE=64
-elif [ ${TASK,,} == oold ]; then
-    DROPOUT=0.2
-    LR=2e-5
-    BATCH_SIZE=128
-elif [ ${TASK,,} == ohsd ]; then
-    DROPOUT=0.3
-    LR=7e-6
-    BATCH_SIZE=32
-elif [ ${TASK,,} == svreg ]; then
-    DROPOUT=0.1
-    LR=2e-5
-    BATCH_SIZE=8
-elif [ ${TASK,,} == sec ]; then
+if [ ${TASK,,} == sec ]; then
     DROPOUT=0.1
     LR=2e-5
     BATCH_SIZE=16
-elif [ ${TASK,,} == fid ]; then
-    DROPOUT=0.1
-    LR=2e-5
-    BATCH_SIZE=32
-elif [ ${TASK,,} == xnli ]; then
-    DROPOUT=0.1
-    LR=2e-5
-    BATCH_SIZE=16
-elif [ ${TASK,,} == mdd ]; then
-    DROPOUT=0.2
-    LR=2e-5
-    BATCH_SIZE=32
+
 else
     echo "{$TASK} is not supported, Exit!!!!"
     exit 125
 fi
 
-export MAX_SEQ_LEN=128 
+export MAX_SEQ_LEN=128
 export PKL_DATA=./raw_datasets/alue.$MAX_SEQ_LEN.jaber.pkl
 export MODEL_PATH=./pretrained_models/JABER
 export MODEL_NAME=pytorch_model.bin
@@ -69,5 +42,5 @@ do
         --hidden_dropout_prob $DROPOUT \
         --overwrite_output_dir \
         --save_model False \
-        --do_eval 
+        --do_eval
 done
