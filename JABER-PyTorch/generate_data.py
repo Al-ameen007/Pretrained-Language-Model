@@ -171,7 +171,7 @@ def get_tag_to_id_cls(exp_lst):
     return tag_to_id
 
 
-'''def load_mq2q_dev():
+def load_mq2q_dev():
     filename = "./raw_datasets/mq2q.dev.tsv"
     if not os.path.exists(filename):
         raise ValueError ("Please check the README to generate MQ2Q dev set")
@@ -179,7 +179,7 @@ def get_tag_to_id_cls(exp_lst):
     for idx, line in enumerate(open(filename)):
         lbl, s1, s2 = line.strip().split("\t")
         lst.append({"idx": len(lst), "s_lst": [s1, s2], "lbl": int(lbl)})
-    return lst'''
+    return lst
 
 
 def process_alue():
@@ -232,19 +232,16 @@ def process_alue():
                 del exp["lbl"]'''
 
     # SEC
-
     bench_dict["SEC"] = defaultdict(list)
-    secDir = os.path.join(data_dir, "SemEval2018-Task1-all-data/Arabic/E-c")
-    for filename in os.listdir(secDir):
-        f = os.path.join(secDir, filename)
-        df = pd.read_csv(filename, sep="\t")
+    filename = os.path.join(data_dir, "SemEval2018-Task1-all-data/Arabic/E-c/2018-E-c-Ar-%s.txt")
+    for portion in ["train", "dev", "test", "test-gold"]:
+        df = pd.read_csv(filename % portion, sep="\t")
+
         for row in df.to_dict(orient="records"):
             exp = {"idx": row["ID"], "s_lst": [row["Tweet"]]}
-            if filename != os.path.join(secDir, "emotion_no_labels_v1.0.tsv"):
+            if portion != "test":
                 exp["lbl"] = [int(v) for _, v in list(row.items())[2:]]
-                bench_dict["SEC"][portion].append(exp)
-
-
+            bench_dict["SEC"][portion].append(exp)
 
     '''# FID
     bench_dict["FID"] = defaultdict(list)
